@@ -1,0 +1,30 @@
+modLoader = "javafml"
+loaderVersion = "[46,)"
+issueTrackerURL = "https://github.com/TCBuildMC/BlockyLib/issues"
+license = "Apache-2.0"
+
+[[mods]]
+modId = "blockylib"
+version = "${version}"
+displayName = "BlockyLib"
+displayURL = "https://github.com/TCBuildMC/BlockyLib"
+authors = "Block_Mrlimr267"
+credits = ""
+description = '''
+A Minecraft modding library that mostly used in mods of Blocky Series.
+'''
+logoFile = "icon.png"
+
+[[dependencies.blockylib]]
+modId = "forge"
+mandatory = true
+versionRange = "[46,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.blockylib]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20, 1.20.2)"
+ordering = "NONE"
+side = "BOTH"
