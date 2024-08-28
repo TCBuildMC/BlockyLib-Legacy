@@ -39,6 +39,9 @@ subprojects {
             }
         }
         maven {
+            url = "https://maven.terraformersmc.com/releases/"
+        }
+        maven {
             url = "https://jitpack.io/"
             content {
                 includeGroupAndSubgroups "com.github"
@@ -96,6 +99,7 @@ allprojects {
 
     java {
         withSourcesJar()
+        withJavadocJar()
     }
 
     publishing {

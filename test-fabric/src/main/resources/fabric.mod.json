@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "test-mod",
+  "version": "1.0.0",
+  "name": "Test Mod",
+  "description": "A test mod for BlockyLib.",
+  "authors": [
+    "Unknown"
+  ],
+  "contributors": [
+    "Unknown"
+  ],
+  "license": "The unlicensed",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.test.fabric.TestModFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15",
+    "fabric": "*",
+    "minecraft": "1.20.x",
+    "blockylib": "*"
+  }
+}

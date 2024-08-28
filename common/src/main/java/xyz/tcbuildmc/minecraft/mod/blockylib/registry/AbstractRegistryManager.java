@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import xyz.tcbuildmc.minecraft.mod.blockylib.BlockyLib;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,10 +35,6 @@ public abstract class AbstractRegistryManager {
     public abstract void register();
 
     public <T> Supplier<T> register(Registry<? super T> registry, String id, T entry) {
-        if (registry == BuiltInRegistries.CREATIVE_MODE_TAB) {
-            BlockyLib.LOGGER.warn("Using RegistryManager#tab to register CreativeModeTabs is recommended.");
-        }
-
         RegistryHolder<T> holder = new RegistryHolderImpl<>(id, entry);
         this.holders.computeIfAbsent(registry, __ -> new ArrayList<>()).add(holder);
         return holder;

@@ -12,4 +12,8 @@ include("fabric")
 include("forge")
 //include("neoforge")
 
+include("test-common")
+include("test-fabric")
+include("test-forge")
+
 rootProject.name = "BlockyLib"
