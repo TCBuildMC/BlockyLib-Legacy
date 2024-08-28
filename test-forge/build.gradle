@@ -19,9 +19,6 @@ loom {
     }
 
     forge {
-        convertAccessWideners = true
-        extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-
         mixinConfig "blockylib.mixins.json"
         mixinConfig "blockylib-forge.mixins.json"
     }
