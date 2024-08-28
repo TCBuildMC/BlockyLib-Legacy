@@ -4,7 +4,11 @@ import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -15,6 +19,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.gameevent.GameEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,6 +77,33 @@ public abstract class AbstractRegistryManager {
     public <T extends BlockEntity> Supplier<BlockEntityType<T>> blockEntityType(String id, BlockEntityType.BlockEntitySupplier<T> factory, Block... linked) {
         return this.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, id, BlockEntityType.Builder.of(factory, linked)
                 .build(Util.fetchChoiceType(References.BLOCK_ENTITY, id)));
+    }
+
+    public Supplier<GameEvent> gameEvent(String id, int notificationRadius) {
+        return this.register(BuiltInRegistries.GAME_EVENT, id, new GameEvent(id, notificationRadius));
+    }
+
+    public Supplier<GameEvent> gameEvent(String id) {
+        return this.gameEvent(id, 16);
+    }
+
+    public Supplier<ResourceLocation> stat(String id, StatFormatter formatter) {
+        Supplier<ResourceLocation> stat = this.register(BuiltInRegistries.CUSTOM_STAT, id, this.of(id));
+        Stats.CUSTOM.get(stat.get(), formatter);
+
+        return stat;
+    }
+
+    public Supplier<ResourceLocation> stat(String id) {
+        return this.stat(id, StatFormatter.DEFAULT);
+    }
+
+    public <T> TagKey<T> tag(Registry<T> registry, String id) {
+        return this.tag(registry.key(), id);
+    }
+
+    public <T> TagKey<T> tag(ResourceKey<? extends Registry<T>> key, String id) {
+        return TagKey.create(key, this.of(id));
     }
 
     protected ResourceLocation of(String id) {

@@ -1,6 +1,6 @@
 package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item;
 
-import dev.architectury.injectables.annotations.ExpectPlatform;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ItemLike;
@@ -11,9 +11,9 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public final class TillableBlockRegistry {
-    @ExpectPlatform
     public static void register(Block input, Predicate<UseOnContext> usagePredicate, Consumer<UseOnContext> tillingAction) {
-        throw new AssertionError();
+        Pair<Predicate<UseOnContext>, Consumer<UseOnContext>> output = Pair.of(usagePredicate, tillingAction);
+        HoeItem.TILLABLES.put(input, output);
     }
 
     public static void register(Block input, Predicate<UseOnContext> usagePredicate, BlockState tilled) {
@@ -22,5 +22,13 @@ public final class TillableBlockRegistry {
 
     public static void register(Block input, Predicate<UseOnContext> usagePredicate, BlockState tilled, ItemLike droppedItem) {
         register(input, usagePredicate, HoeItem.changeIntoStateAndDropItem(tilled, droppedItem));
+    }
+
+    public static void unregister(Block input) {
+        HoeItem.TILLABLES.remove(input);
+    }
+
+    public static Pair<Predicate<UseOnContext>, Consumer<UseOnContext>> getTillingAction(Block input) {
+        return HoeItem.TILLABLES.get(input);
     }
 }

@@ -1,5 +1,6 @@
 package xyz.tcbuildmc.minecraft.mod.blockylib.event.forge;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
@@ -9,20 +10,29 @@ import xyz.tcbuildmc.minecraft.mod.blockylib.BlockyLib;
 import xyz.tcbuildmc.minecraft.mod.blockylib.event.command.CommandRegistrationEvent;
 import xyz.tcbuildmc.minecraft.mod.blockylib.event.registry.CreativeTabModifyEvent;
 import xyz.tcbuildmc.minecraft.mod.blockylib.registry.entity.villager.forge.TradeRegistryImpl;
-import xyz.tcbuildmc.minecraft.mod.blockylib.registry.item.forge.FuelRegistryImpl;
+import xyz.tcbuildmc.minecraft.mod.blockylib.registry.block.forge.FuelRegistryImpl;
 
 import java.util.ArrayList;
 
 public class ForgeEventsImpl {
+    public static void register() {
+        MinecraftForge.EVENT_BUS.addListener(ForgeEventsImpl::creativeTabModify);
+        MinecraftForge.EVENT_BUS.addListener(ForgeEventsImpl::commandRegister);
+
+        MinecraftForge.EVENT_BUS.addListener(ForgeEventsImpl::fuelRegister);
+        MinecraftForge.EVENT_BUS.addListener(ForgeEventsImpl::tradeRegister);
+        MinecraftForge.EVENT_BUS.addListener(ForgeEventsImpl::wanderingTradeRegister);
+    }
+
     public static void creativeTabModify(BuildCreativeModeTabContentsEvent event) {
-        for (CreativeTabModifyEvent ctmEvent : CreativeTabModifyEvent.EVENT) {
-            ctmEvent.onModify(event.getTab(), event);
+        for (CreativeTabModifyEvent.ModifyAll e : CreativeTabModifyEvent.MODIFY_ALL) {
+            e.onModify(event.getTab(), event);
         }
     }
 
     public static void commandRegister(RegisterCommandsEvent event) {
-        for (CommandRegistrationEvent crEvent : CommandRegistrationEvent.EVENT) {
-            crEvent.register(event.getDispatcher(), event.getBuildContext(), event.getCommandSelection());
+        for (CommandRegistrationEvent e : CommandRegistrationEvent.EVENT) {
+            e.register(event.getDispatcher(), event.getBuildContext(), event.getCommandSelection());
         }
     }
 

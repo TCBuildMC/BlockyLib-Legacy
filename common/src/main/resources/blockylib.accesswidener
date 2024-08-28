@@ -9,14 +9,27 @@ mutable field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 accessible field net/minecraft/world/item/ShovelItem FLATTENABLES Ljava/util/Map;
 accessible field net/minecraft/world/item/HoeItem TILLABLES Ljava/util/Map;
 
-# VillagerTrades
-accessible class net/minecraft/world/entity/npc/VillagerTrades$EmeraldForItems
-accessible class net/minecraft/world/entity/npc/VillagerTrades$ItemsForEmeralds
-accessible class net/minecraft/world/entity/npc/VillagerTrades$SuspiciousStewForEmerald
-accessible class net/minecraft/world/entity/npc/VillagerTrades$ItemsAndEmeraldsToItems
-accessible class net/minecraft/world/entity/npc/VillagerTrades$EnchantedItemForEmeralds
-accessible class net/minecraft/world/entity/npc/VillagerTrades$EmeraldsForVillagerTypeItem
-accessible class net/minecraft/world/entity/npc/VillagerTrades$TippedArrowForItemsAndEmeralds
-accessible class net/minecraft/world/entity/npc/VillagerTrades$EnchantBookForEmeralds
-accessible class net/minecraft/world/entity/npc/VillagerTrades$TreasureMapForEmeralds
-accessible class net/minecraft/world/entity/npc/VillagerTrades$DyedArmorForEmeralds
+# Villager Trades (transitivable)
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$EmeraldForItems
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$ItemsForEmeralds
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$SuspiciousStewForEmerald
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$ItemsAndEmeraldsToItems
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$EnchantedItemForEmeralds
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$EmeraldsForVillagerTypeItem
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$TippedArrowForItemsAndEmeralds
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$EnchantBookForEmeralds
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$TreasureMapForEmeralds
+transitive-accessible class net/minecraft/world/entity/npc/VillagerTrades$DyedArmorForEmeralds
+
+# Brewing
+accessible class net/minecraft/world/item/alchemy/PotionBrewing$Mix
+accessible field net/minecraft/world/item/alchemy/PotionBrewing POTION_MIXES Ljava/util/List;
+accessible field net/minecraft/world/item/alchemy/PotionBrewing CONTAINER_MIXES Ljava/util/List;
+
+# Villager
+accessible field net/minecraft/world/entity/npc/Villager WANTED_ITEMS Ljava/util/Set;
+mutable field net/minecraft/world/entity/npc/Villager WANTED_ITEMS Ljava/util/Set;
+accessible field net/minecraft/world/entity/npc/Villager FOOD_POINTS Ljava/util/Map;
+mutable field net/minecraft/world/entity/npc/Villager FOOD_POINTS Ljava/util/Map;
+accessible field net/minecraft/world/entity/ai/behavior/WorkAtComposter COMPOSTABLE_ITEMS Ljava/util/List;
+mutable field net/minecraft/world/entity/ai/behavior/WorkAtComposter COMPOSTABLE_ITEMS Ljava/util/List;

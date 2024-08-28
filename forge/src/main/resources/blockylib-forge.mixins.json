@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "FireBlockMixin"
+    "FireBlockMixin",
+    "WeatheringCopperMixin"
   ],
   "injectors": {
     "defaultRequire": 1

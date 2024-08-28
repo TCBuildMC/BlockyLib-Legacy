@@ -13,6 +13,7 @@ public final class BlockyLib {
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     public static void init() {
+        LOGGER.info("{}: {}", MOD_NAME, MOD_VERSION);
     }
 
     @Environment(EnvType.CLIENT)

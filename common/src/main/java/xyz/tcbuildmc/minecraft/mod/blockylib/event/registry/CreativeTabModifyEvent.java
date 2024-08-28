@@ -3,9 +3,17 @@ package xyz.tcbuildmc.minecraft.mod.blockylib.event.registry;
 import net.minecraft.world.item.CreativeModeTab;
 import xyz.tcbuildmc.minecraft.mod.blockylib.event.Event;
 
-@FunctionalInterface
-public interface CreativeTabModifyEvent {
-    Event<CreativeTabModifyEvent> EVENT = Event.create();
+public final class CreativeTabModifyEvent {
+    public static final Event<CreativeTabModifyEvent.ModifyAll> MODIFY_ALL = Event.create();
 
-    void onModify(CreativeModeTab tab, CreativeModeTab.Output entries);
+    @FunctionalInterface
+    public interface ModifyAll {
+        void onModify(CreativeModeTab tab, CreativeModeTab.Output entries);
+    }
+
+    // TODO: Modify specified one
+    @FunctionalInterface
+    public interface Modify {
+        void onModify(CreativeModeTab.Output entries);
+    }
 }
