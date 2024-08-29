@@ -1,4 +1,4 @@
-package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item;
+package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item.tool;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.world.item.AxeItem;

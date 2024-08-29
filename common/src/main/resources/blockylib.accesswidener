@@ -33,3 +33,21 @@ accessible field net/minecraft/world/entity/npc/Villager FOOD_POINTS Ljava/util/
 mutable field net/minecraft/world/entity/npc/Villager FOOD_POINTS Ljava/util/Map;
 accessible field net/minecraft/world/entity/ai/behavior/WorkAtComposter COMPOSTABLE_ITEMS Ljava/util/List;
 mutable field net/minecraft/world/entity/ai/behavior/WorkAtComposter COMPOSTABLE_ITEMS Ljava/util/List;
+accessible method net/minecraft/world/entity/ai/village/poi/PoiTypes registerBlockStates (Lnet/minecraft/core/Holder;Ljava/util/Set;)V
+transitive-accessible method net/minecraft/world/entity/npc/VillagerType <init> (Ljava/lang/String;)V
+transitive-accessible method net/minecraft/world/entity/npc/VillagerProfession <init> (Ljava/lang/String;Ljava/util/function/Predicate;Ljava/util/function/Predicate;Lcom/google/common/collect/ImmutableSet;Lcom/google/common/collect/ImmutableSet;Lnet/minecraft/sounds/SoundEvent;)V
+accessible field net/minecraft/world/entity/npc/VillagerType BY_BIOME Ljava/util/Map;
+
+# Entity
+accessible field net/minecraft/world/entity/ai/attributes/DefaultAttributes SUPPLIERS Ljava/util/Map;
+
+# Advancement
+accessible field net/minecraft/advancements/CriteriaTriggers CRITERIA Ljava/util/Map;
+
+# Block
+transitive-accessible method net/minecraft/world/level/block/Blocks never (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/EntityType;)Ljava/lang/Boolean;
+transitive-accessible method net/minecraft/world/level/block/Blocks never (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z
+transitive-accessible method net/minecraft/world/level/block/Blocks always (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/EntityType;)Ljava/lang/Boolean;
+transitive-accessible method net/minecraft/world/level/block/Blocks always (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z
+transitive-accessible method net/minecraft/world/level/block/Blocks litBlockEmission (I)Ljava/util/function/ToIntFunction;
+transitive-accessible method net/minecraft/world/level/block/Blocks ocelotOrParrot (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/EntityType;)Ljava/lang/Boolean;

@@ -26,7 +26,8 @@
     ]
   },
   "mixins": [
-    "blockylib.mixins.json"
+    "blockylib.mixins.json",
+    "blockylib-fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15",

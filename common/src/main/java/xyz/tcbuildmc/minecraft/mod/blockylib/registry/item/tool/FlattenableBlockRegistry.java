@@ -1,4 +1,4 @@
-package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item;
+package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item.tool;
 
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.level.block.Block;

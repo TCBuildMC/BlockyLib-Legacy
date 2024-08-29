@@ -3,13 +3,18 @@ package xyz.tcbuildmc.minecraft.mod.blockylib.registry;
 import net.minecraft.Util;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.datafix.fixes.References;
+import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
+import net.minecraft.world.entity.npc.VillagerType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -19,12 +24,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.ApiStatus;
+import xyz.tcbuildmc.minecraft.mod.blockylib.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -79,6 +84,14 @@ public abstract class AbstractRegistryManager {
                 .build(Util.fetchChoiceType(References.BLOCK_ENTITY, id)));
     }
 
+    public Supplier<SoundEvent> soundEvent(String id, float range) {
+        return this.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createFixedRangeEvent(this.of(id), range));
+    }
+
+    public Supplier<SoundEvent> soundEvent(String id) {
+        return this.soundEvent(id, 16.0f);
+    }
+
     public Supplier<GameEvent> gameEvent(String id, int notificationRadius) {
         return this.register(BuiltInRegistries.GAME_EVENT, id, new GameEvent(id, notificationRadius));
     }
@@ -98,6 +111,26 @@ public abstract class AbstractRegistryManager {
         return this.stat(id, StatFormatter.DEFAULT);
     }
 
+    @ApiStatus.Experimental
+    public Supplier<PoiType> poiType(String id, int ticketCount, int searchDistance, Block... poiBlocks) {
+        CollectionUtils.SetBuilder<BlockState> builder = CollectionUtils.hashSetBuilder();
+
+        for (Block poiBlock : poiBlocks) {
+            builder.entry(poiBlock.getStateDefinition().getPossibleStates());
+        }
+
+        Set<BlockState> blockStates = builder.build();
+
+        Supplier<PoiType> poiType = this.register(BuiltInRegistries.POINT_OF_INTEREST_TYPE, id, new PoiType(blockStates, ticketCount, searchDistance));
+        ResourceKey<PoiType> key = ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, this.of(id));
+        PoiTypes.registerBlockStates(BuiltInRegistries.POINT_OF_INTEREST_TYPE.getHolderOrThrow(key), blockStates);
+        return poiType;
+    }
+
+    public Supplier<VillagerType> villagerType(String id) {
+        return this.register(BuiltInRegistries.VILLAGER_TYPE, id, new VillagerType(this.of(id).toString()));
+    }
+
     public <T> TagKey<T> tag(Registry<T> registry, String id) {
         return this.tag(registry.key(), id);
     }
@@ -106,7 +139,7 @@ public abstract class AbstractRegistryManager {
         return TagKey.create(key, this.of(id));
     }
 
-    protected ResourceLocation of(String id) {
+    public ResourceLocation of(String id) {
         return new ResourceLocation(this.modId, id);
     }
 }

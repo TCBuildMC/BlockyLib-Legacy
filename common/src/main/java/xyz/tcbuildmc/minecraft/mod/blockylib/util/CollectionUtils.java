@@ -21,6 +21,10 @@ public final class CollectionUtils {
         return new CollectionUtils.MapBuilder<>(new HashMap<>());
     }
 
+    public static <E> CollectionUtils.SetBuilder<E> hashSetBuilder() {
+        return new CollectionUtils.SetBuilder<>(new HashSet<>());
+    }
+
     private CollectionUtils() {
         throw new UnsupportedOperationException("Utility class");
     }
@@ -43,6 +47,28 @@ public final class CollectionUtils {
 
         public Map<K, V> build() {
             return this.map;
+        }
+    }
+
+    public static final class SetBuilder<E> {
+        private final Set<E> set;
+
+        private SetBuilder(Set<E> set) {
+            this.set = set;
+        }
+
+        public SetBuilder<E> entry(E value) {
+            this.set.add(value);
+            return this;
+        }
+
+        public SetBuilder<E> entry(Collection<? extends E> collection) {
+            this.set.addAll(collection);
+            return this;
+        }
+
+        public Set<E> build() {
+            return this.set;
         }
     }
 }

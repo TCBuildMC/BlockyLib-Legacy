@@ -44,6 +44,10 @@ public final class VillagerInteractionRegistry {
         Villager.FOOD_POINTS.remove(item);
     }
 
+    public static int getFoodCount(Item item) {
+        return Villager.FOOD_POINTS.getOrDefault(item, 0);
+    }
+
     public static void registerSeed(Item item) { // That Farmer Use At Composter
         if (WorkAtComposter.COMPOSTABLE_ITEMS instanceof ImmutableList<Item>) {
             WorkAtComposter.COMPOSTABLE_ITEMS = new ArrayList<>(WorkAtComposter.COMPOSTABLE_ITEMS);

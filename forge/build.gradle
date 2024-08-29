@@ -17,6 +17,10 @@ loom {
         mixinConfig "blockylib.mixins.json"
         mixinConfig "blockylib-forge.mixins.json"
     }
+
+    runConfigs.configureEach {
+        ideConfigGenerated = false
+    }
 }
 
 configurations {

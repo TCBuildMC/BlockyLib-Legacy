@@ -1,4 +1,4 @@
-package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item;
+package xyz.tcbuildmc.minecraft.mod.blockylib.registry.item.tool;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.item.HoeItem;
@@ -7,6 +7,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -28,7 +29,7 @@ public final class TillableBlockRegistry {
         HoeItem.TILLABLES.remove(input);
     }
 
-    public static Pair<Predicate<UseOnContext>, Consumer<UseOnContext>> getTillingAction(Block input) {
-        return HoeItem.TILLABLES.get(input);
+    public static Optional<Pair<Predicate<UseOnContext>, Consumer<UseOnContext>>> getTillingAction(Block input) {
+        return Optional.ofNullable(HoeItem.TILLABLES.get(input));
     }
 }
